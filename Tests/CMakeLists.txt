@@ -17,6 +17,8 @@ add_executable(OpenXLSXTests)
 target_sources(OpenXLSXTests
         PRIVATE
         main.cpp
+        testCellNameNumber.cpp
+        testCSV.cpp
         testXLDocument.cpp
         testXLCell.cpp
         testXLCellRange.cpp
@@ -28,7 +30,6 @@ target_sources(OpenXLSXTests
         testXLFormula.cpp
         testXLRow.cpp
         testXLSheet.cpp
-        testCellNameNumber.cpp
         )
 
 target_link_libraries(OpenXLSXTests
