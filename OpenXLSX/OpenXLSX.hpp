@@ -46,6 +46,7 @@ YM      M9  MM    MM MM       MM    MM   d'  `MM.    MM            MM   d'  `MM.
 #ifndef OPENXLSX_OPENXLSX_HPP
 #define OPENXLSX_OPENXLSX_HPP
 
+#include "headers/CSV.hpp"
 #include "headers/XLCell.hpp"
 #include "headers/XLCellRange.hpp"
 #include "headers/XLCellReference.hpp"

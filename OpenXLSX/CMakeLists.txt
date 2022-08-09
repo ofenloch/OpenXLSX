@@ -82,6 +82,7 @@ endif ()
 #   List of project source files
 #=======================================================================================================================
 set(OPENXLSX_SOURCES
+        ${CMAKE_CURRENT_LIST_DIR}/sources/CSV.cpp
         ${CMAKE_CURRENT_LIST_DIR}/sources/XLCell.cpp
         ${CMAKE_CURRENT_LIST_DIR}/sources/XLCellIterator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/sources/XLCellRange.cpp
