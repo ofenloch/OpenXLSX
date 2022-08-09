@@ -85,6 +85,11 @@ namespace OpenXLSX
             auto        rng  = workSheet.range(XLCellReference(firstColumnName + sRow), XLCellReference(lastColumnName + sRow));
             for (auto cl : rng) {
                 ofs << valueAsString(cl.value()) << separator;
+                // TODO: This should work properly:
+                //         ofs << cl.value() << separator;
+                //      There is an operator 
+                //         inline std::ostream& operator<<(std::ostream& os, const XLCellValue& value)
+                //      in file OpenXLSX/headers/XLCellValue.hpp
             }
             ofs << '\n';
         }    // for (uint32_t iRow = 1; iRow <= nRows; iRow++)
