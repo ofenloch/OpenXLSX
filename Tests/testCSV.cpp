@@ -35,15 +35,18 @@ std::filesystem::path createXLSXDocument(const std::filesystem::path& fileName)
                                        std::string(std::to_string(i) + " times pi equals " + std::to_string(i * pi))));
     }
 
+    // write header to sheet 1
+    wks.cell("A1").value() = "Number (int)";
+    wks.cell("B1").value() = "Number (float)";
+    wks.cell("C1").value() = "String";
+    wks.cell("D1").value() = "String";
     // write data to sheet 1
-    uint32_t iRow = 1;
+    uint32_t iRow = 2;
     for (auto r : rows) {
         wks.cell(iRow, 1).value() = std::get<0>(r);
         wks.cell(iRow, 2).value() = std::get<1>(r);
         wks.cell(iRow, 3).value() = std::get<2>(r);
         wks.cell(iRow, 4).value() = std::get<3>(r);
-        //std::cout << iRow << " : " << std::get<0>(r) << "," << std::get<1>(r) << "," << std::get<2>(r) << "," << std::get<3>(r) << "," << '\n';
-        //std::cout << iRow << " : " << wks.cell(iRow, 1).value().get<int>() << "," << wks.cell(iRow, 2).value().get<double>() << "," << wks.cell(iRow, 3).value().get<std::string>() << "," << wks.cell(iRow, 4).value().get<std::string>() << "," << '\n';
         iRow++;
     }
 
