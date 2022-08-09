@@ -363,4 +363,27 @@ TEST_CASE("XLCellValue Tests", "[XLCellValue]")
         REQUIRE_THROWS(value.get<std::string>());
 
     }
+
+    SECTION("Operator <<")
+    {
+        XLCellValue value;
+        value = "Hello OpenXLSX!";
+        std::stringstream sstream1;
+        sstream1 << value;
+        REQUIRE(value.get<std::string>() == "Hello OpenXLSX!");
+        REQUIRE(sstream1.str() == "Hello OpenXLSX!");
+
+        std::filesystem::path fileName { "./testCellValue.xlsx" };
+        std::filesystem::remove(fileName);
+        XLDocument doc;
+        doc.create(fileName);
+
+        auto wks = doc.workbook().worksheet("Sheet1");
+        wks.cell("A1").value() = "Hello OpenXLSX!";
+
+        std::stringstream sstream2;
+        sstream2 << wks.cell("A1").value();
+        // This fails:
+        REQUIRE(sstream2.str() == "Hello OpenXLSX!");
+    }
 }
