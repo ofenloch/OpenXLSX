@@ -84,6 +84,8 @@ namespace OpenXLSX
             std::string sRow = std::to_string(iRow);
             auto        rng  = workSheet.range(XLCellReference(firstColumnName + sRow), XLCellReference(lastColumnName + sRow));
             for (auto cl : rng) {
+                // TODO: Remove the last separator (according to the specs, 
+                //       the records end with an \n and not with a separator).
                 ofs << valueAsString(cl.value()) << separator;
                 // TODO: This should work properly:
                 //         ofs << cl.value() << separator;
