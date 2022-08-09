@@ -73,26 +73,28 @@ namespace OpenXLSX
         int               error           = 0;
         const uint32_t    nRows           = workSheet.rowCount();
         const uint16_t    nColumns        = workSheet.columnCount();
-        const std::string firstColumnName = XLWorksheet::columnNumberToName(1);
+        const std::string firstColumnName = "A"; // XLWorksheet::columnNumberToName(1);
         const std::string lastColumnName  = XLWorksheet::columnNumberToName(nColumns);
-        std::ofstream     ofs;
+        const std::string secondtolastColumnName  = XLWorksheet::columnNumberToName(nColumns-1);
 
+        
         std::cout << "CCSV::worksheetToCSV: creating CSV file " << csvFileName << " ...\n";
+        std::ofstream     ofs;
         ofs.open(csvFileName);
 
         for (uint32_t iRow = 1; iRow <= nRows; iRow++) {
             std::string sRow = std::to_string(iRow);
-            auto        rng  = workSheet.range(XLCellReference(firstColumnName + sRow), XLCellReference(lastColumnName + sRow));
+            auto        rng  = workSheet.range(XLCellReference(firstColumnName + sRow), XLCellReference(secondtolastColumnName + sRow));
             for (auto cl : rng) {
-                // TODO: Remove the last separator (according to the specs, 
-                //       the records end with an \n and not with a separator).
-                ofs << valueAsString(cl.value()) << separator;
                 // TODO: This should work properly:
                 //         ofs << cl.value() << separator;
-                //      There is an operator 
+                //      There is an operator
                 //         inline std::ostream& operator<<(std::ostream& os, const XLCellValue& value)
                 //      in file OpenXLSX/headers/XLCellValue.hpp
+                // This works (see https://github.com/troldal/OpenXLSX/issues/166)
+                ofs << (XLCellValue)cl.value() << separator;
             }
+            ofs << (XLCellValue)workSheet.cell(XLCellReference(lastColumnName + sRow)).value();
             ofs << '\n';
         }    // for (uint32_t iRow = 1; iRow <= nRows; iRow++)
         ofs.close();

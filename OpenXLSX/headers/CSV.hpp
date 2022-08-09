@@ -45,34 +45,6 @@ namespace OpenXLSX
         static std::string escapeString(const std::string& str);
 
         /**
-         * @brief return a string representation of a cell value
-         * 
-         * @param xlValue 
-         * @return std::string 
-         * 
-         * 
-         * @todo There should be something like this already in the library ....
-         *       For example inline std::ostream& operator<<(std::ostream& os, const XLCellValue& value)
-         */
-        static std::string valueAsString(const XLCellValue& xlValue)
-        {
-            XLValueType type = xlValue.type();
-            switch (type) {
-                case XLValueType::Empty:
-                    return "";
-                case XLValueType::Boolean:
-                    return std::to_string(xlValue.get<bool>());
-                case XLValueType::Integer:
-                    return std::to_string(xlValue.get<int64_t>());
-                case XLValueType::Float:
-                    return std::to_string(xlValue.get<double>());
-                case XLValueType::String:
-                    return xlValue.get<std::string>();
-                default:
-                    return "";
-            }
-        }
-        /**
          * @brief Get the separator used
          *
          * @return char
